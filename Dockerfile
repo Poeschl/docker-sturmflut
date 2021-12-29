@@ -1,14 +1,11 @@
-FROM alpine:3.15 as build
+FROM debian:bullseye-slim as build
 
 WORKDIR /opt
 
-RUN apk add --no-cache \
-    git=2.34.1-r0 \
-    ca-certificates=20191127-r7 \
-    pkgconf=1.8.0-r0 \
-    build-base=0.5-r2 \
-    imagemagick=7.1.0.16-r0 \
-    imagemagick-dev=7.1.0.16-r0
+RUN apt-get update && apt-get -y --no-install-recommends install \
+    git=1:2.30.2-1 \
+    ca-certificates=20210119 \
+    pkg-config libpthread-stubs0-dev libmagickcore-dev libmagickwand-dev make git gcc libc-dev
 
 ENV COMMIT_SHA 'f76221d873826db2a9df73f4626a792d28aacb42'
 RUN git config --global advice.detachedHead false && \
@@ -19,12 +16,12 @@ RUN git config --global advice.detachedHead false && \
     ls -al
 
 
-FROM alpine:3.15
+FROM debian:bullseye-slim
 
 ENTRYPOINT ["sturmflut"]
 
-RUN apk add --no-cache \
-    imagemagick=7.1.0.16-r0 \
-    imagemagick-dev=7.1.0.16-r0
+RUN apt-get update && apt-get -y --no-install-recommends install \
+    pkg-config libpthread-stubs0-dev libmagickcore-dev libmagickwand-dev make git gcc libc-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=build /opt/sturmflut/sturmflut /usr/local/bin/sturmflut
