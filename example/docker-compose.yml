@@ -5,7 +5,5 @@ services:
     image: ghcr.io/poeschl/sturmflut
     volumes:
       - ./images:/images
-    command: rc3.schenklklopfer.de /images/test1.png -p 1234 -t 5 -o 1800:490
-
-
-
+    command: rc3.schenklklopfer.de /images/test1.png -o 1800:490
+    stop_signal: KILL
