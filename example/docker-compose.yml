@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  client1:
+    image: ghcr.io/poeschl/sturmflut
+    volumes:
+      - ./images:/images
+    command: rc3.schenklklopfer.de /images/test1.png -o 1800:490
+
+
+
