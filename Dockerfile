@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
     libmagickwand-dev=8:6.9.11.60+dfsg-1.3 \
     build-essential=12.9
 
-ENV COMMIT_SHA 'f76221d873826db2a9df73f4626a792d28aacb42'
+ENV COMMIT_SHA '0e3092ab6db23d2529b8ddc95e5d5e2c3ae8fc9d'
 RUN git config --global advice.detachedHead false && \
     git clone https://github.com/TobleMiner/sturmflut.git -b master sturmflut && \
     cd sturmflut && \
